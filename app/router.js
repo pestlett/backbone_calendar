@@ -3,17 +3,30 @@ define([
   "app",
   // Modules
   
-  // Views
+  // Modules
+  'modules/user/user',
   'modules/layout/navigation',
   'modules/layout/content'
-  // Create a model for all views for the user
 ],
 
-function(app, Navigation, Content) {
+function(app, User, Navigation, Content) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
     initialize: function() {
+    	
+    	app.User = new User.Model();
+    	
+    	app.User.fetch({
+    		success: function(){
+      		console.log(app.User);    			
+    		},
+    		error: function(){
+      		console.log("Poop");
+      		console.log(app.User);    			
+    		}
+    	});
+    	
       // TODO Clean this up...
       var collections = {
       };

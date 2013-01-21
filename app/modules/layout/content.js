@@ -44,12 +44,22 @@ function(app) {
   			success: function(d){
   				if(d.result){
   					$("div#login-status").html("Successfully logged in").removeClass('text-error').addClass('text-success');
+  					app.User.save(d.message, {
+  						success: function(){
+  							console.log("success");
+  						},
+  						error: function(){
+  							console.log("error");
+  						}
+  					});
   					// Proceed to login :)
   				}else{
+  					app.User.set('loggedIn', false);
   					$("input#username").val( d.message.split('/')[0] );
   					$("input#password").val("").focus();
   					$("div#login-status").html("Incorrect username or password").removeClass('text-success').addClass('text-error');
   				}
+  				console.log(app.User);
   			}
   		});
   		

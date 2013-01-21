@@ -29,7 +29,15 @@ $app->post('/login/attempt', function(){
 	$ajaxReturn = array();
 	if($username === 'admin' && $password === 'admin') {
 		$ajaxReturn["result"] = true;
-		$ajaxReturn["message"] = "$username/$password";
+		$ajaxReturn["message"] = array(
+			"id" => 1,
+			"loggedIn" => true,
+			"username" => "admin",
+			"friendlyName" => "Administrator",
+			"email" => "admin@clickcal.com",
+			"friendlyName" => "Administrator",
+			"apiKey" => uniqid("", true)
+		);
 	} else {
 		$ajaxReturn["result"] = false;
 		$ajaxReturn["message"] = "$username/$password";

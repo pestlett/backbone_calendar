@@ -9,12 +9,13 @@ define([
   // Plugins
   'hbregs',
   'jqueryajax',
-  'backbonelayoutmanager'
+  'backbonelayoutmanager',
+  'localstorage'
 ],
 function($, _, Backbone, Handlebars){
 	// We can set links and routes as !/route https://developers.google.com/webmasters/ajax-crawling/docs/specification
 	// I haven't specified the meta to opt into AJAX crawling
-	var app = { root: '/backbone_calendar' };
+	var app = { root: '/backbone_calendar/backbone_calendar' };
 	
 	// Create a new JavaScript Template object
 	var JST = window.JST || {};

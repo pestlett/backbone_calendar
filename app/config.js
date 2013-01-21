@@ -16,6 +16,7 @@ require({
 		// Plugins
 		backbonelayoutmanager: '../assets/js/plugins/backbone.layoutmanager/backbone.layoutmanager',
 		backboneforms: '../assets/js/plugins/backbone-forms/backbone-forms.min',
+		localstorage: '../assets/js/plugins/backbone/backbone.localStorage-min',
 		text: '../assets/js/vendor/require/text',
 		
 		// Libs
@@ -44,6 +45,7 @@ require({
 		handlebars: { exports: 'Handlebars' },
 		backbone: { deps: ['jquery','loadash'], exports: 'Backbone' },
 		backbonelayoutmanager: { deps: ['backbone'], exports: 'Backbone.Layout' },
+		localstorage: ['backbone'],
 		backboneforms: { deps: ['backbone'], exports: 'Backbone.Form' },
 		bootstrap: ['jquery'],
 		hbregs: ['handlebars'],
