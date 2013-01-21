@@ -1,0 +1,36 @@
+      <div class="row-fluid">
+      {{#if isManager}}
+        <div class="span2">
+          <div class="well sidebar-nav">
+            <ul id="employee-list" class="nav nav-list"><!-- Loop over departments and users of which we pwn -->
+              <li class="nav-header"><a href="#" class="muted">Account Managers</a></li>
+              <li id="user1"><a href="#!/hr/stats/user/1">Kate Thomas</a></li>
+              <li id="user2"><a href="#!/hr/stats/user/2">Amanda Edmonds</a></li>
+              <li id="user3"><a href="#!/hr/stats/user/3">Raj Baines</a></li>
+              <li id="user4"><a href="#!/hr/stats/user/4">Paul Mason</a></li>
+              <li class="nav-header"><a href="#" class="muted">Business Development Managers</a></li>
+              <li id="user5"><a href="#!/hr/stats/user/5">Ian Nunoo</a></li>
+              <li id="user6"><a href="#!/hr/stats/user/6">Zoe Quinworth</a></li>
+              <li id="user7"><a href="#!/hr/stats/user/7">Amy Goodison</a></li>
+              <li id="user8"><a href="#!/hr/stats/user/8">Rachel Parsons</a></li>
+              <li id="user9"><a href="#!/hr/stats/user/9">Mark Latham-Chadwick</a></li>
+              <li id="user10"><a href="#!/hr/stats/user/10">Katherine Foster</a></li>
+              <li class="nav-header"><a href="#" class="muted">Web Design</a></li>
+              <li id="user11"><a href="#!/hr/stats/user/11">Jamie Murphy</a></li>
+              <li id="user12"><a href="#!/hr/stats/user/12">Jim Darlington</a></li>
+              <li id="user13"><a href="#!/hr/stats/user/13">James Lang</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span10">
+          <div id="content">Here be the content</div>
+        </div><!--/span-->
+      </div><!--/row-->
+      <hr>
+      {{else}}
+        <div class="span12">
+          <div id="content">Here be the content</div>
+        </div><!--/span-->
+      </div><!--/row-->
+      <hr>
+      {{/if}}
