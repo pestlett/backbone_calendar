@@ -8,7 +8,14 @@ function(app) {
   var Content = app.module();
 
   Content.Views.HomeView = Backbone.View.extend({
-    template: "views/home.screen"
+    template: "views/home.screen",
+    events: {
+      "click li.event": "clickEvent"
+    },
+    clickEvent: function(ev){
+      var user = $(ev.target).text();
+      console.log("You have clicked on " + user + "'s event")
+    }
   });
 
   Content.Views.Container = Backbone.View.extend({

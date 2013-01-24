@@ -1,0 +1,56 @@
+//
+// Calendar
+// --------------------------------------------------
+
+#calendar{
+	width: auto;
+	th{
+		width: @dayDescriptorUnit;
+
+	};
+	td{
+		.transition("width, height 5s ease-out");
+		border-left: 1px solid #ddd;
+		text-align: left;
+		width: @dayDescriptorUnit;
+		height: @dayDescriptorUnit;
+		div.day{
+			max-height: @dayDescriptorUnit;
+			 minheight: @dayDescriptorUnit;
+				 height: @dayDescriptorUnit;
+				 width: 100%;
+			overflow-y: auto;
+			ul#events{
+				li.event{
+					cursor: pointer;
+					padding: @paddingMini;
+					font-size: @fontSizeMini;
+					.buttonBackground(@clickSkyblue, darken(@clickSkyblue, 5%));
+					&:hover{
+						.buttonBackground(darken(@clickSkyblue, 5%), darken(@clickSkyblue,15%));
+					}
+				}
+			}		
+		}
+	}
+	td.large{		
+		.transition("width, height 5s ease-out");
+		width: @dayDescriptorUnit*1.2;
+		height: @dayDescriptorUnit*1.2;
+		div.day{
+			max-height: @dayDescriptorUnit*1.2;
+			 minheight: @dayDescriptorUnit*1.2;
+				 height: @dayDescriptorUnit*1.2;		
+		}
+	}
+	td.extra-large{		
+		.transition("width, height 5s ease-out");
+		width: @dayDescriptorUnit*1.5;
+		height: @dayDescriptorUnit*1.5;
+		div.day{
+			max-height: @dayDescriptorUnit*1.5;
+			 minheight: @dayDescriptorUnit*1.5;
+				 height: @dayDescriptorUnit*1.5;		
+		}
+	}
+}
