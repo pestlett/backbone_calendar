@@ -1,31 +1,21 @@
 define([
   // Application.
   "app",
-  // Modules
   
   // Modules
   'modules/user/user',
   'modules/layout/navigation',
-  'modules/layout/content'
+  'modules/layout/content',
+  'modules/errors/errors'
 ],
 
-function(app, User, Navigation, Content) {
+function(app, User, Navigation, Content, Errors) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
     initialize: function() {
     	
-    	app.User = new User.Model();
-    	
-    	app.User.fetch({
-    		success: function(){
-      		console.log(app.User);    			
-    		},
-    		error: function(){
-      		console.log("Poop");
-      		console.log(app.User);    			
-    		}
-    	});
+    	app.user = new User.Model();
     	
       // TODO Clean this up...
       var collections = {
@@ -36,43 +26,73 @@ function(app, User, Navigation, Content) {
       
       // Check we are logged in
       
-
       // Use main layout and set Views.
-      app.useLayout("layouts/main").setViews({
+      this.layout = app.useLayout("layouts/main").setViews({
       	"#nav": new Navigation.Views.NavBar(),
-      	"#container": new Content.Views.Container().setViews({
-      		"#content": new Content.Views.LoginView( { person: { name: 'Martin Jewell', age: 27 } } )
-      	})
-      }).render();
+      	"#container": new Content.Views.Container()
+      });
     },
 
     routes: {
 			'': 'index',
-			'!/login': 'login',
-			'!/error/:error': 'error',
+			'login': 'login',
+      'logout': 'logout',
+			'error/:error': 'error',
 			'*action': 'default'
     },
 
+    // Need a method for removing the previous container, if necessary (so group these routes), updates the menu structure and page layout according to backend data returned
+    // Pass into the reset method an object containing the views as first parameter then whatever else
+    // Have an active group... say that will do whatever and if active group is different from the one being rendered clear the #content, that is if it exists
+    
+    
     index: function() {
       // Reset the state and render.
-      this.reset();
+    	console.log("BOOM");
+      this.reset({
+        "#content": new Content.Views.HomeView(  ) 
+      });
     },
     
     error: function(error) {
-    	this.reset(); // will fire off what is needed
+    	this.reset({
+    		"#content": new Errors.Views.Error( { error: error } ) 
+    	}); // will fire off what is needed
     },
     
     login: function() {
-    	this.reset();
+    	console.log("HELLO");
+    	this.reset({
+    		"#content": new Content.Views.LoginView(  ) 
+    	}, true);
+    },
+
+    logout: function(){
+      console.log("LOGOUT");
+      app.user.save({'loggedIn': false});
+      app.router.navigate("#login", true);
     },
     
     default: function(action) {
-    	this.reset();
+      this.reset({
+        "#content": new Errors.Views.Error( { error: 404 } ) 
+      }); // will fire off what is needed
     },
 
-    reset: function() {
-      // Reset active model.
-      app.active = false;
+    reset: function(newViews, bypassLogin) {
+      bypassLogin = bypassLogin || false;
+      var that = this;
+      app.user.fetch({
+        success: function(model){
+          if(model.get("loggedIn") || bypassLogin) {
+            newViews = newViews || {};
+            that.layout.setViews(newViews);       
+            that.layout.render();
+          } else {
+            if(Backbone.history.fragment !== "login") app.router.navigate("#login", true);
+          }
+        }
+      });
     }
   });
 

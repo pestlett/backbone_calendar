@@ -30,7 +30,9 @@ require({
 		// Useful definitions
 		errtpl: 'templates/errors',
 		laytpl: 'templates/layouts',
-		vwtpl: 'templates/views'
+		vwtpl: 'templates/views',
+
+		app: 'app'
 	},
 	
 	// Map any references to underscore in our vendor libs to loadash 
@@ -40,6 +42,7 @@ require({
 	
 	// Ensure that dependencies are maintained and nothing loads before its due turn
 	shim: {
+		app: { exports: 'app' },
 		jquery: { exports: '$' },
 		loadash: { exports: '_' },
 		handlebars: { exports: 'Handlebars' },

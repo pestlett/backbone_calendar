@@ -1,5 +1,7 @@
 // Essentially a copy of https://github.com/tbranyen/boilerplate-handlebars-layoutmanager/blob/master/app/app.js
 define([
+  // Objects
+  'errors',
   // Vendors
   'jquery',
   'loadash',
@@ -12,11 +14,10 @@ define([
   'backbonelayoutmanager',
   'localstorage'
 ],
-function($, _, Backbone, Handlebars){
+function(Errors, $, _, Backbone, Handlebars){
 	// We can set links and routes as !/route https://developers.google.com/webmasters/ajax-crawling/docs/specification
 	// I haven't specified the meta to opt into AJAX crawling
 	var app = { root: '/backbone_calendar/backbone_calendar' };
-	
 	// Create a new JavaScript Template object
 	var JST = window.JST || {};
 	
@@ -53,6 +54,9 @@ function($, _, Backbone, Handlebars){
 	
 	//Mix Backbone.Events, modules, and layout management into the app object.
   return _.extend(app, {
+  	// Load a list of the possible errors that can occur
+  	errors: Errors,
+  	
     // Create a custom object with a nested Views object.
     module: function(additionalProps) {
       return _.extend({ Views: {} }, additionalProps);
@@ -72,12 +76,10 @@ function($, _, Backbone, Handlebars){
       
       // Create a new Layout with options.
       var layout = new Backbone.Layout(_.extend({
+      	el: "#main",
         template: name
       }, options));
       
-      // Insert into the DOM.
-      $("#main").html(layout.el);
-
       // Render the layout.
       layout.render();
 
