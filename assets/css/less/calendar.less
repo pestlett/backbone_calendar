@@ -27,45 +27,6 @@
 					padding: @paddingMini;
 					font-size: @fontSizeMini;
 				};
-				li.event.request{
-					.buttonBackground(@clickSkyblue, darken(@clickSkyblue, 5%));
-					&:hover{
-						.buttonBackground(darken(@clickSkyblue, 5%), darken(@clickSkyblue,15%));
-					}
-				};
-				li.event.re-request{
-					.buttonBackground(@btnPrimaryBackground, darken(@btnPrimaryBackgroundHighlight, 5%));
-				};
-				li.event.denied{
-					.buttonBackground(@btnDangerBackground, @btnDangerBackgroundHighlight);
-					&:hover{
-						.buttonBackground(darken(@btnDangerBackground, 5%), darken(@btnDangerBackgroundHighlight,15%));
-					}
-				};
-				li.event.approved{
-					.buttonBackground(@btnSuccessBackground, @btnSuccessBackgroundHighlight);
-					&:hover{
-						.buttonBackground(darken(@btnSuccessBackground, 5%), darken(@btnSuccessBackgroundHighlight,15%));
-					}
-				};
-				li.event.cancelled{
-					.buttonBackground(@btnWarningBackground, @btnWarningBackgroundHighlight);
-					&:hover{
-						.buttonBackground(darken(@btnWarningBackground, 5%), darken(@btnWarningBackgroundHighlight,15%));
-					}
-				};
-				li.event.sickness{
-					.buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
-					&:hover{
-						.buttonBackground(darken(@btnInverseBackground, 5%), darken(@btnInverseBackgroundHighlight,15%));
-					}
-				};
-				li.event.lateness{
-					.buttonBackground(@btnInfoBackground, @btnInfoBackgroundHighlight);
-					&:hover{
-						.buttonBackground(darken(@btnInfoBackground, 5%), darken(@btnInfoBackgroundHighlight,15%));
-					}
-				};
 			}		
 		}
 	}
@@ -88,5 +49,44 @@
 			 minheight: @dayDescriptorUnit*1.5;
 				 height: @dayDescriptorUnit*1.5;		
 		}
-	}
+	}	
+	.request{
+		.buttonBackground(@clickSkyblue, darken(@clickSkyblue, 5%));
+		&:hover{
+			.buttonBackground(darken(@clickSkyblue, 5%), darken(@clickSkyblue,15%));
+		}
+	};
+	.re-request{
+		.buttonBackground(@btnPrimaryBackground, darken(@btnPrimaryBackgroundHighlight, 5%));
+	};
+	.denied{
+		.buttonBackground(@btnDangerBackground, @btnDangerBackgroundHighlight);
+		&:hover{
+			.buttonBackground(darken(@btnDangerBackground, 5%), darken(@btnDangerBackgroundHighlight,15%));
+		}
+	};
+	.approved{
+		.buttonBackground(@btnSuccessBackground, @btnSuccessBackgroundHighlight);
+		&:hover{
+			.buttonBackground(darken(@btnSuccessBackground, 5%), darken(@btnSuccessBackgroundHighlight,15%));
+		}
+	};
+	.cancelled{
+		.buttonBackground(@btnWarningBackground, @btnWarningBackgroundHighlight);
+		&:hover{
+			.buttonBackground(darken(@btnWarningBackground, 5%), darken(@btnWarningBackgroundHighlight,15%));
+		}
+	};
+	.sickness{
+		.buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
+		&:hover{
+			.buttonBackground(darken(@btnInverseBackground, 5%), darken(@btnInverseBackgroundHighlight,15%));
+		}
+	};
+	.lateness{
+		.buttonBackground(@btnInfoBackground, @btnInfoBackgroundHighlight);
+		&:hover{
+			.buttonBackground(darken(@btnInfoBackground, 5%), darken(@btnInfoBackgroundHighlight,15%));
+		}
+	};
 }
