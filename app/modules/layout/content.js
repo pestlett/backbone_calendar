@@ -10,11 +10,30 @@ function(app) {
   Content.Views.HomeView = Backbone.View.extend({
     template: "views/home.screen",
     events: {
-      "click li.event": "clickEvent"
+      "click li.event": "clickEvent",
+      "click button.event-filter": "filterEvents"
     },
     clickEvent: function(ev){
       var user = $(ev.target).text();
       console.log("You have clicked on " + user + "'s event")
+    },
+    filterEvents: function(ev){
+      var eventType = $(ev.target).attr("id");
+      var filterStatus = $(ev.target).hasClass("active");
+      if(filterStatus) {
+        if(eventType === "request"){
+          $("li.event.request,li.event.re-request").hide();
+        }else{
+          $("li.event."+eventType).hide();
+        }
+      }else{
+        if(eventType === "request"){
+          $("li.event.request,li.event.re-request").show();
+        }else{
+          $("li.event."+eventType).show();
+        }        
+      }
+      console.log("You are filtering Event Type " + eventType + " and the current Filter is " + (!filterStatus ? "active":"disabled"));
     }
   });
 
