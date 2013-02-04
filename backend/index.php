@@ -5,17 +5,15 @@ require 'Slim/Slim.php';
 // Initiate sessions
 @session_start();
 
+define('APPPATH', 'application');
 define('APPNAME', 'clickcal');
 
 // Where we currently are
-define('\Slim\SlimROOT', __DIR__."/");
+define('SLIMROOT', __DIR__."/");
 
 // Also load a file with some nice functions
-function nice_print($array)
-{
-	if(gettype($array) !== "array") echo $array;
-	echo "<pre>".print_r($array, 1)."</pre>";
-}
+require_once(SLIMROOT.APPPATH."/base_classes/core.php");
+require_once(SLIMROOT.APPPATH."/base_classes/encryption.php");
 
 \Slim\Slim::registerAutoloader();
 
@@ -31,6 +29,7 @@ $app = new \Slim\Slim();
 // Miscellaneous Routes
 //--------------------------
 
+// localhost:80/backbone_calendar/backbone_calendar/backend/login/check
 $app->get('/login/check', function(){
 
 	$ajaxReturn = array(

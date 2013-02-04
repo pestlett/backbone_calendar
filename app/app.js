@@ -15,6 +15,7 @@ define([
   'localstorage'
 ],
 function(Errors, $, _, Backbone, Handlebars){
+  'use strict';
 	// We can set links and routes as !/route https://developers.google.com/webmasters/ajax-crawling/docs/specification
 	// I haven't specified the meta to opt into AJAX crawling
 	var app = { root: '/backbone_calendar/backbone_calendar' };
@@ -44,19 +45,19 @@ function(Errors, $, _, Backbone, Handlebars){
 			
 			// Compile the template, if needed
 			if(!JST[path].__compiled__) {
-				JST[path] = Handlebars.compile(contents);
+        JST[path] = Handlebars.compile(contents);
 				JST[path].__complied__ = true;				
 			}
 			
 			return JST[path];
 		}
 	});
-	
+
 	//Mix Backbone.Events, modules, and layout management into the app object.
   return _.extend(app, {
-  	// Load a list of the possible errors that can occur
-  	errors: Errors,
-  	
+    // Load a list of the possible errors that can occur
+    errors: Errors,
+
     // Create a custom object with a nested Views object.
     module: function(additionalProps) {
       return _.extend({ Views: {} }, additionalProps);
@@ -76,7 +77,7 @@ function(Errors, $, _, Backbone, Handlebars){
       
       // Create a new Layout with options.
       var layout = new Backbone.Layout(_.extend({
-      	el: "#main",
+        el: "#main",
         template: name
       }, options));
       

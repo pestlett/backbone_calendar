@@ -14,9 +14,9 @@ function(app, User, Navigation, Content, Errors) {
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
     initialize: function() {
-    	
-    	app.user = new User.Model();
-    	
+      
+      app.user = new User.Model();
+      
       // TODO Clean this up...
       var collections = {
       };
@@ -28,17 +28,17 @@ function(app, User, Navigation, Content, Errors) {
       
       // Use main layout and set Views.
       this.layout = app.useLayout("layouts/main").setViews({
-      	"#nav": new Navigation.Views.NavBar(),
-      	"#container": new Content.Views.Container()
+        "#nav": new Navigation.Views.NavBar(),
+        "#container": new Content.Views.Container()
       });
     },
 
     routes: {
-			'': 'index',
-			'login': 'login',
+      '': 'index',
+      'login': 'login',
       'logout': 'logout',
-			'error/:error': 'error',
-			'*action': 'default'
+      'error/:error': 'error',
+      '*action': 'defaultAction'
     },
 
     // Need a method for removing the previous container, if necessary (so group these routes), updates the menu structure and page layout according to backend data returned
@@ -48,23 +48,23 @@ function(app, User, Navigation, Content, Errors) {
     
     index: function() {
       // Reset the state and render.
-    	console.log("BOOM");
+      console.log("BOOM");
       this.reset({
-        "#content": new Content.Views.HomeView(  ) 
+        "#content": new Content.Views.HomeView(  )
       });
     },
     
     error: function(error) {
-    	this.reset({
-    		"#content": new Errors.Views.Error( { error: error } ) 
-    	}); // will fire off what is needed
+      this.reset({
+        "#content": new Errors.Views.Error( { error: error } )
+      }); // will fire off what is needed
     },
     
     login: function() {
-    	console.log("HELLO");
-    	this.reset({
-    		"#content": new Content.Views.LoginView(  ) 
-    	}, true);
+      console.log("HELLO");
+      this.reset({
+        "#content": new Content.Views.LoginView(  )
+      }, true);
     },
 
     logout: function(){
@@ -73,12 +73,12 @@ function(app, User, Navigation, Content, Errors) {
       app.router.navigate("#login", true);
     },
     
-    default: function(action) {
+    defaultAction: function(action) {
       this.reset({
-        "#content": new Errors.Views.Error( { error: 404 } ) 
+        "#content": new Errors.Views.Error( { error: 404 } )
       }); // will fire off what is needed
     },
-
+    
     reset: function(newViews, bypassLogin) {
       bypassLogin = bypassLogin || false;
       var that = this;
@@ -86,7 +86,7 @@ function(app, User, Navigation, Content, Errors) {
         success: function(model){
           if(model.get("loggedIn") || bypassLogin) {
             newViews = newViews || {};
-            that.layout.setViews(newViews);       
+            that.layout.setViews(newViews);
             that.layout.render();
           } else {
             if(Backbone.history.fragment !== "login") app.router.navigate("#login", true);

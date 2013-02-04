@@ -10,7 +10,11 @@ class Object
 	{
 		$this->_db = Database::getInstance();
 	}
-
+	/**
+	 * process the fields ready for the query
+	 * @param  string $processFor What type of query are we processing for?
+	 * @return mixed             return either null or the partial query string
+	 */
 	private function processFields($processFor="update")
 	{
 		$fieldString = "";
@@ -30,6 +34,11 @@ class Object
 		else return null;
 	}
 
+	/**
+	 * load All data for the current table --
+	 * 	Todo: have select statement to control if needed
+	 * @return resource 		The database resource returned by PDO
+	 */
 	public function loadData()
 	{
 		if($this->_id === null) return false;
@@ -37,6 +46,11 @@ class Object
 		return $this->_db->query("SELECT * FROM $this->_tableName WHERE id=:id",array(':id'=>$this->_id));
 	}
 
+	/**
+	 * Update the data for the current table for the model
+	 * @param  array $data an array of data for the PDO update statement
+	 * @return resource       The database resource returned by PDO
+	 */
 	public function updateData($data)
 	{
 		if($this->_id === null) return false;
@@ -45,6 +59,11 @@ class Object
 		return $this->_db->query("UPDATE $this->_tableName SET $queryString WHERE id=:id",$data);
 	}
 
+	/**
+	 * Save the current data for the particular model
+	 * @param  array $data The columns to be saved
+	 * @return resource       The database resource returned by PDO
+	 */
 	public function saveData($data)
 	{
 		if($this->_id === null) return $this->updateData($data);
@@ -54,6 +73,10 @@ class Object
 		return $res;
 	}
 
+	/**
+	 * Delete a particular row for the current model
+	 * @return resource 		The database resource returned by PDO
+	 */
 	public function deleteData()
 	{
 		if($this->_id === null) return false;
