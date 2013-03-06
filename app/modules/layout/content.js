@@ -31,7 +31,7 @@ function(app) {
           $("li.event.request,li.event.re-request").show();
         }else{
           $("li.event."+eventType).show();
-        }        
+        }
       }
       console.log("You are filtering Event Type " + eventType + " and the current Filter is " + (!filterStatus ? "active":"disabled"));
     }

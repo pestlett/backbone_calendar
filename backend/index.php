@@ -19,6 +19,7 @@ require_once(SLIMROOT.APPPATH."/base_classes/encryption.php");
 
 $app = new \Slim\Slim();
 
+define("REFERRER", $app->request()->getReferrer());
 
 // Model Routes
 //--------------------------
@@ -94,6 +95,49 @@ $app->put('/login/check', function(){
 	$_SESSION[APPNAME] = array( "userData" => (array)$ajaxReturn );
 
 	echo json_encode($ajaxReturn);	
+});
+
+$app->get('/user/menu', function(){
+	$ajaxReturn = array();
+	$ref = str_replace("http://127.0.0.1/backbone_calendar/backbone_calendar/", "", REFERRER);
+
+	if(isset($_SESSION[APPNAME]["userData"])){
+		if((bool)$_SESSION[APPNAME]["userData"]["loggedIn"]){
+			$ajaxReturn = array(
+				"home" => array(
+					"url" => "#",
+					"displayName" => "Home",
+					"active" => ($ref === "")
+				),
+				"about" => array(
+					"url" => "#about",
+					"displayName" => "About",
+					"active" => ($ref === "about")
+				),
+				"contact" => array(
+					"url" => "#contact",
+					"displayName" => "Contact",
+					"active" => ($ref === "contact")
+				),
+				"error404" => array(
+					"url" => "#error/404",
+					"displayName" => "Error 404",
+					"active" => ($ref === "error/404")
+				),
+				"error418" => array(
+					"url" => "#error/418",
+					"displayName" => "Error 418",
+					"active" => ($ref === "error/418")
+				),
+				"error420" => array(
+					"url" => "#error/420",
+					"displayName" => "Error 420",
+					"active" => ($ref === "error/420")
+				)		
+			);
+		}
+	}
+	echo json_encode($ajaxReturn);
 });
 
 $app->run();

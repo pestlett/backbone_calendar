@@ -1,7 +1,7 @@
 define([],function(){
 	// All status codes, headers and messages are taken from https://tools.ietf.org/html/rfc2616
 	// Probably best humanising the message as that is the whole point of this file
-	var errors = {	
+	var errors = {
 		// 4xx Client Errors
 		"400": { "header": "Bad Request", "message": "The request could not be understood by the server due to malformed syntax."},
 		"401": { "header": "Unauthorized", "message": "The request requires user authentication."},

@@ -18,37 +18,37 @@ function(Errors, $, _, Backbone, Handlebars){
   'use strict';
 	// We can set links and routes as !/route https://developers.google.com/webmasters/ajax-crawling/docs/specification
 	// I haven't specified the meta to opt into AJAX crawling
-	var app = { root: '/backbone_calendar/backbone_calendar' };
+	var app = { root: '/backbone_calendar/backbone_calendar', appName: "ClickCal" };
 	// Create a new JavaScript Template object
 	var JST = window.JST || {};
-	
+
 	// Configure Backbone LayoutManager :D
 	Backbone.Layout.configure({
 		manage: true,
-		
+
     prefix: "/app/templates/",
-    
+
 		fetch: function(path){
 			var done;
 			path = path + '.html'; // makes things look a little cleaner
-			
+
 			// If we do not have the template then fetch it
 			if(!JST[path]) {
 				done = this.async();
 				return $.ajax({ url: app.root + path }).then(function(contents){
 					JST[path] = Handlebars.compile(contents);
 					JST[path].__complied__ = true;
-					
+
 					done(JST[path]);
 				});
 			}
-			
+
 			// Compile the template, if needed
 			if(!JST[path].__compiled__) {
         JST[path] = Handlebars.compile(contents);
-				JST[path].__complied__ = true;				
+				JST[path].__complied__ = true;
 			}
-			
+
 			return JST[path];
 		}
 	});
@@ -74,13 +74,13 @@ function(Errors, $, _, Backbone, Handlebars){
       if (this.layout) {
         this.layout.remove();
       }
-      
+
       // Create a new Layout with options.
       var layout = new Backbone.Layout(_.extend({
         el: "#main",
         template: name
       }, options));
-      
+
       // Render the layout.
       layout.render();
 

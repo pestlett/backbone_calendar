@@ -1,0 +1,9 @@
+clickCAL:
+ ☐ Create calendar layout
+ ☐ Create bootstrap calendar plugin
+ ☐ Create day view and event view
+
+clickCAL-Backend:
+ ☐ Create backend calendar date checking
+ ☐ Have login system working
+ ☐ Have clickAuth login setup
