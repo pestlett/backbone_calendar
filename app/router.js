@@ -53,7 +53,7 @@ function(app, User, Menu, Permissions, Navigation, Content, Errors) {
     },
 
     login: function() {
-      console.log("HELLO");
+      console.log("HEL3LO");
       this.reset({
         "#content": new Content.Views.LoginView(  )
       }, true);
@@ -77,6 +77,10 @@ function(app, User, Menu, Permissions, Navigation, Content, Errors) {
       app.user.fetch({
         success: function(model){
           if(model.get("loggedIn")) {
+            if(Backbone.history.fragment === "login"){
+              // Because it's just silly viewing the login page when you're logged in
+              app.router.navigate("#", true);
+            }
             var friendlyName = app.user.get("friendlyName");
             app.user.menu = new Menu.Collection(model.get('id'));
             app.user.menu.fetch({
@@ -100,7 +104,7 @@ function(app, User, Menu, Permissions, Navigation, Content, Errors) {
             that.layout = app.useLayout("layouts/main").setViews({
               "#container": new Content.Views.Container(),
               "#nav": new Navigation.Views.NavBar({
-                "sys": {name: app.appName, status: (app.user.get("loggedIn")?"Welcome " + friendlyName:"")},
+                "sys": {name: app.appName, status: ""},
                 "menu": (app.user.menu)
               })
             });
@@ -108,7 +112,6 @@ function(app, User, Menu, Permissions, Navigation, Content, Errors) {
             that.layout.setViews( newViews );
             that.layout.render();
           }else {
-                console.log("hello1");
             if(Backbone.history.fragment !== "login") app.router.navigate("#login", true);
           }
         }

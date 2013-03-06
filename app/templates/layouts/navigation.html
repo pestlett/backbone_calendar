@@ -7,10 +7,19 @@
           </a>
           <a class="brand" href="#">{{sys.name}}</a>
           <div class="nav-collapse collapse">
-            <p class="navbar-text pull-right">
-              {{sys.status}}
-            </p>            
-
+            {{#if sys.status}}
+            <div class="btn-group pull-right">
+              <a class="btn btn-inverse" href="#"><i class="icon-user icon-white"></i> {{sys.status}}</a>
+              <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+                <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+                <li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
+                <li class="divider"></li>
+                <li><a href="#logout"><i class="icon-off"></i> Logout</a></li>
+              </ul>
+            </div>
+            {{/if}}
             <ul class="nav">
               {{#each menu}}
               {{#if this.active}}
